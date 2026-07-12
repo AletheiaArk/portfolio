@@ -1,0 +1,13 @@
+{
+  "name": "Aletheia — Independent Developer",
+  "short_name": "Aletheia",
+  "description": "Aletheia — independent developer. CS graduate, Hong Kong Polytechnic University.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#eeeeee",
+  "theme_color": "#35bfab",
+  "icons": [
+    { "src": "/favicon.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}
