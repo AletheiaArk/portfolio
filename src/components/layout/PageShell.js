@@ -1,21 +1,23 @@
 import Background from "@/components/layout/Background";
 import Sidebar from "@/components/layout/Sidebar";
 
-export default function PageShell({ title, subtitle, children }) {
+export default function PageShell({ title, subtitle, wide, children }) {
   return (
     <>
       <Background />
       <main>
-        <div className="shell">
+        <div className={"shell" + (wide ? " shell-wide" : "")}>
           <aside className="shell-side">
             <Sidebar />
           </aside>
           <section className="shell-main">
             <div className="card page-card">
-              <header className="page-head">
-                <h1 className="page-title">{title}</h1>
-                {subtitle && <p className="page-sub">{subtitle}</p>}
-              </header>
+              {title && (
+                <header className="page-head">
+                  <h1 className="page-title">{title}</h1>
+                  {subtitle && <p className="page-sub">{subtitle}</p>}
+                </header>
+              )}
               {children}
             </div>
           </section>

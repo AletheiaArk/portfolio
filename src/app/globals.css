@@ -280,13 +280,17 @@ main {
 .cal-grid .day.empty { visibility: hidden; }
 
 /* ==========================================================================
- *  Sub-page shell (Recent / Projects / About / Recommended / detail)
+ *  Sub-page shell (Recent / Projects / About / Spec / detail)
  * ======================================================================== */
 .shell {
-  max-width: 1120px; margin: 0 auto;
+  width: 100%; max-width: 1120px; margin: 0 auto;
   display: flex; align-items: flex-start; gap: 28px;
   padding: 48px 24px 64px;
 }
+/* Fluid variant (My Spec): scales with the viewport instead of a fixed cap,
+   so it fills the screen on 1080p / 2K / 4K. The 2400px ceiling just keeps
+   rows from stretching absurdly on ultra-wide displays. */
+.shell-wide { max-width: min(60%, 2400px); }
 .shell-side { width: 232px; flex-shrink: 0; position: sticky; top: 48px; }
 .shell-main { flex: 1; min-width: 0; }
 
@@ -295,7 +299,7 @@ main {
 .page-title { font-size: 32px; font-weight: 800; letter-spacing: -0.02em; }
 .page-sub { color: var(--color-secondary); font-size: 14px; margin-top: 6px; }
 
-/* Generic list rows (Recent / Projects / Recommended) */
+/* Generic list rows (Recent / Projects) */
 .list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
 .list-row {
   display: flex; align-items: center; gap: 16px;
@@ -330,27 +334,44 @@ main {
   margin-left: 6px; vertical-align: middle;
 }
 
-/* About: prose + facts + motto */
+/* About: stacked sections (About me · About the site) */
+.about-handle {
+  font-size: 14px; color: var(--color-secondary);
+  margin-top: -10px; margin-bottom: 20px;
+}
+.about-block + .about-block { margin-top: 34px; }
+.about-heading {
+  font-size: 22px; font-weight: 700; letter-spacing: -0.01em;
+  color: var(--color-primary); margin-bottom: 14px;
+}
+/* My Spec: grouped hardware / software lists */
+.spec-group + .spec-group { margin-top: 34px; }
+.spec-title {
+  font-size: 22px; font-weight: 700; letter-spacing: -0.01em;
+  color: var(--color-primary); margin-bottom: 16px;
+}
+.spec-col {
+  background: rgba(255, 255, 255, 0.5); border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 14px; padding: 18px 20px;
+}
+.spec-col-head {
+  display: inline-block;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--color-secondary); margin-bottom: 12px;
+  padding-bottom: 1px; border-bottom: 1.5px solid currentColor;
+}
+.spec-list + .spec-col-head { margin-top: 22px; }
+.spec-list { display: flex; flex-direction: column; }
+.spec-row {
+  display: flex; justify-content: space-between; gap: 16px;
+  padding: 9px 0; border-top: 1px solid rgba(51, 79, 82, 0.08);
+}
+.spec-row:first-child { border-top: none; }
+.spec-row dt { font-size: 13.5px; color: var(--color-secondary); flex-shrink: 0; }
+.spec-row dd { font-size: 13.5px; color: var(--color-primary); text-align: right; }
+
 .prose p { font-size: 15.5px; line-height: 1.8; color: var(--color-primary); margin-bottom: 16px; }
 .prose p:last-child { margin-bottom: 0; }
-.facts { margin-top: 26px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-.fact {
-  background: rgba(255, 255, 255, 0.5); border: 1px solid rgba(255, 255, 255, 0.55);
-  border-radius: 14px; padding: 16px 18px;
-}
-.fact dt {
-  display: flex; align-items: center; gap: 8px;
-  font-size: 12px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
-  color: var(--color-secondary); margin-bottom: 6px;
-}
-.info-ico { flex-shrink: 0; font-size: 14px; line-height: 1.4; }
-.fact dd { font-size: 14px; color: var(--color-primary); line-height: 1.5; }
-.motto {
-  margin-top: 26px; padding: 18px 22px;
-  border-left: 4px solid var(--color-brand); border-radius: 0 16px 16px 0;
-  background: rgba(53, 191, 171, 0.08);
-  font-size: 16px; font-style: italic; color: var(--color-primary); line-height: 1.6;
-}
 
 /* Project detail */
 .back-link {
@@ -397,6 +418,4 @@ main {
   .shell-main { width: 100%; max-width: 640px; margin: 0 auto; }
   .page-card { padding: 30px 26px; border-radius: 18px; }
   .page-title { font-size: 28px; }
-
-  .facts { grid-template-columns: 1fr; }
 }

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { site } from "@/lib/site";
 import { Icon } from "@/components/ui/Icon";
 
-// The row of actions under the calendar: Write · Projects · Github (+ optional email).
+// The row of actions under the calendar: X · Projects · Github (+ optional email).
 export default function Controls() {
   const external = site.writeUrl.startsWith("http");
   const { github, email } = site.social;
@@ -15,7 +15,7 @@ export default function Controls() {
         target={external ? "_blank" : undefined}
         rel={external ? "noreferrer" : undefined}
       >
-        <Icon.pencil aria-hidden="true" /> Write
+        <Icon.x aria-hidden="true" /> Twitter
       </Link>
 
       <Link className="grid-btn" href="/projects" aria-label="My projects">
