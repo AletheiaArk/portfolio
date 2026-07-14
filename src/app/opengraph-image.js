@@ -48,6 +48,7 @@ export default function Image() {
         >
           <img
             src={avatar}
+            alt=""
             width={150}
             height={150}
             style={{
