@@ -1,7 +1,7 @@
 import PageShell from "@/components/layout/PageShell";
 import { specs } from "@/lib/site";
 
-export const metadata = { title: "My Spec" };
+export const metadata = { title: "My Specs" };
 
 function SpecRows({ rows }) {
   return (
@@ -18,7 +18,7 @@ function SpecRows({ rows }) {
 
 export default function SpecPage() {
   return (
-    <PageShell title="My Spec" subtitle="The hardware &amp; software behind each setup." wide>
+    <PageShell title="My Specs" subtitle="The hardware &amp; software behind each setup." wide>
       {specs.map((group) => (
         <section key={group.key} className="spec-group">
           <h2 className="spec-title">{group.title}</h2>

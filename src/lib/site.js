@@ -31,32 +31,16 @@ export const site = {
 export const nav = [
   { key: "home", label: "Home", href: "/", icon: "home" },
   { key: "about", label: "About", href: "/about", icon: "about" },
-  { key: "spec", label: "My Spec", href: "/spec", icon: "chip" },
+  { key: "spec", label: "My Specs", href: "/spec", icon: "chip" },
+  { key: "posts", label: "My Posts", href: "/posts", icon: "article" },
   { key: "projects", label: "My Projects", href: "/projects", icon: "projects" },
-  { key: "recent", label: "Recent Articles", href: "/recent", icon: "article" },
 ];
 
 /* ---------------------------------------------------------------------------
- *  Projects. `body` blocks render on the detail page:
- *    { type: "h", text }  -> section heading
- *    { type: "p", text }  -> paragraph
+ *  Projects & Posts now live as Markdown files, one per entry:
+ *    content/projects/<slug>.md   and   content/posts/<slug>.md
+ *  They are read + compiled (incl. KaTeX math) in src/lib/content.js.
  * ------------------------------------------------------------------------- */
-export const projects = [
-  {
-    slug: "github",
-    title: "GitHub",
-    date: "2026/01/01",
-    summary: "My open-source work and experiments live here.",
-    tags: ["@AletheiaArk"],
-    link: "https://github.com/AletheiaArk",
-    body: [
-      {
-        type: "p",
-        text: "I build and share things on GitHub. Follow along at github.com/AletheiaArk — more projects are on the way.",
-      },
-    ],
-  },
-];
 
 /* ---------------------------------------------------------------------------
  *  My Spec — the hardware & software behind each setup. Fill in the values;
@@ -122,10 +106,3 @@ export const about = {
     ],
   },
 };
-
-/* Helpers ------------------------------------------------------------------ */
-export const getProject = (slug) => projects.find((p) => p.slug === slug);
-
-// Projects sorted newest → oldest (used by the "Recent Articles" page).
-export const recentProjects = () =>
-  [...projects].sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));

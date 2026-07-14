@@ -6,25 +6,25 @@ import { Icon } from "@/components/ui/Icon";
 import { getSlugs, getEntry } from "@/lib/content";
 
 export function generateStaticParams() {
-  return getSlugs("projects").map((slug) => ({ slug }));
+  return getSlugs("posts").map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  const p = await getEntry("projects", slug);
-  return { title: p ? p.title : "Project" };
+  const p = await getEntry("posts", slug);
+  return { title: p ? p.title : "Post" };
 }
 
-export default async function ProjectPage({ params }) {
+export default async function PostPage({ params }) {
   const { slug } = await params;
-  const p = await getEntry("projects", slug);
+  const p = await getEntry("posts", slug);
   if (!p) notFound();
 
   return (
     <PageShell title={p.title} subtitle={p.summary} compact>
-      <Link href="/projects" className="back-link">
+      <Link href="/posts" className="back-link">
         <Icon.chevron style={{ width: 16, height: 16, transform: "rotate(180deg)" }} aria-hidden="true" />
-        Back to projects
+        Back to posts
       </Link>
 
       {p.tags?.length > 0 && (

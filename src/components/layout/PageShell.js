@@ -1,7 +1,7 @@
 import Background from "@/components/layout/Background";
 import Sidebar from "@/components/layout/Sidebar";
 
-export default function PageShell({ title, subtitle, wide, children }) {
+export default function PageShell({ title, subtitle, wide, compact, children }) {
   return (
     <>
       <Background />
@@ -13,7 +13,7 @@ export default function PageShell({ title, subtitle, wide, children }) {
           <section className="shell-main">
             <div className="card page-card">
               {title && (
-                <header className="page-head">
+                <header className={"page-head" + (compact ? " page-head-compact" : "")}>
                   <h1 className="page-title">{title}</h1>
                   {subtitle && <p className="page-sub">{subtitle}</p>}
                 </header>
