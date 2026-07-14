@@ -14,6 +14,17 @@ body {
   height: 100%;
 }
 
+/* Hide the scrollbar everywhere but keep scrolling functional. */
+html {
+  scrollbar-width: none;          /* Firefox */
+  -ms-overflow-style: none;       /* old Edge / IE */
+}
+html::-webkit-scrollbar {         /* Chrome / Safari / Edge */
+  width: 0;
+  height: 0;
+  display: none;
+}
+
 body {
   min-height: 100vh;
   color: var(--color-primary);
@@ -113,6 +124,19 @@ main {
   position: relative;
   z-index: 10;
   min-height: 100vh;
+}
+
+/* Page transition — replays on every navigation via app/template.js.
+   Only <main> animates, so the fixed background never shifts. */
+.route-transition main {
+  animation: route-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes route-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .route-transition main { animation: none; }
 }
 
 /* Centre page content on wide screens; scroll gracefully if it's taller. */

@@ -1,7 +1,13 @@
 import PageShell from "@/components/layout/PageShell";
 import { specs } from "@/lib/site";
 
-export const metadata = { title: "My Specs" };
+const description = "The hardware and software behind my server, development, and gaming setups.";
+export const metadata = {
+  title: "My Specs",
+  description,
+  alternates: { canonical: "/spec" },
+  openGraph: { title: "My Specs", description, url: "/spec", type: "website" },
+};
 
 function SpecRows({ rows }) {
   return (

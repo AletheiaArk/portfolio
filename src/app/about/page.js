@@ -1,7 +1,13 @@
 import PageShell from "@/components/layout/PageShell";
 import { about, site } from "@/lib/site";
 
-export const metadata = { title: "About" };
+const description = about.me.paragraphs[0];
+export const metadata = {
+  title: "About",
+  description,
+  alternates: { canonical: "/about" },
+  openGraph: { title: "About", description, url: "/about", type: "profile" },
+};
 
 const handle = site.social.github.split("/").pop();
 

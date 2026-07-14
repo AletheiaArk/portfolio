@@ -2,7 +2,13 @@ import PageShell from "@/components/layout/PageShell";
 import EntryList from "@/components/common/EntryList";
 import { getAllMeta } from "@/lib/content";
 
-export const metadata = { title: "My Posts" };
+const description = "Notes and writing on software, AI, and building things.";
+export const metadata = {
+  title: "My Posts",
+  description,
+  alternates: { canonical: "/posts" },
+  openGraph: { title: "My Posts", description, url: "/posts", type: "website" },
+};
 
 export default function PostsPage() {
   return (

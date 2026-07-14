@@ -12,7 +12,7 @@ export const site = {
   /* Browser tab / SEO ------------------------------------------------------- */
   title: "Aletheia's Portfolio",
   description:
-    "Aletheia — independent developer. CS graduate, Hong Kong Polytechnic University.",
+    "Aletheia is a software developer with a minimalist aesthetic, working across software and AI, and currently building a proprietary project in finance.",
 
   /* Motto — shown as the profile quote and on the About page --------------- */
   motto: "Your lack of commitment is an insult to those who believe in you.",
