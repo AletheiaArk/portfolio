@@ -482,6 +482,8 @@ main {
   .home-side .sidebar, .profile, .calendar { height: auto; }
 
   .shell { flex-direction: column; align-items: stretch; padding: 32px 18px 56px; }
+  /* The wide variant (My Specs) is only for large screens — full width on mobile. */
+  .shell-wide { max-width: 1120px; }
   .shell-side { width: 100%; position: static; max-width: 420px; margin: 0 auto; }
   .shell-main { width: 100%; max-width: 640px; margin: 0 auto; }
   .page-card { padding: 30px 26px; border-radius: 18px; }
