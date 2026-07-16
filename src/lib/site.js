@@ -83,6 +83,7 @@ export const specs = [
       { label: "Monitor", value: "Gigabyte GS27QA (27\" 2K 180Hz)" },
       { label: "Keyboard", value: "Evoworks Evo80 Aluminum TKL Hotswap Wireless (Anodized Sand Gold)" },
       { label: "Mouse", value: "Logitech G304 X & ATK F1 V2" },
+      { label: "Earphones", value: "final E4000" },
     ],
     software: [
       { label: "OS", value: "Windows 11" },
