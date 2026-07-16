@@ -81,6 +81,7 @@ export const specs = [
       { label: "Memory", value: "G.SKILL Trident Z5 Royal Neo DDR5-6000 CL28 32GB" },
       { label: "Storage", value: "1TB + 1TB" },
       { label: "Monitor", value: "Gigabyte GS27QA (27\" 2K 180Hz)" },
+      { label: "Keyboard", value: "Evoworks Evo80 Aluminum TKL Hotswap Wireless (Anodized Sand Gold)" },
       { label: "Mouse", value: "Logitech G304 X & ATK F1 V2" },
     ],
     software: [
