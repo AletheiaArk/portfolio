@@ -38,6 +38,12 @@ export const Icon = {
       <circle cx="6" cy="18" r="1.6" /><circle cx="12" cy="18" r="1.6" /><circle cx="18" cy="18" r="1.6" />
     </svg>
   ),
+  gamepad: (p) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}>
+      <path d="M6 11h4M8 9v4M15 12h.01M18 10h.01" />
+      <path d="M17.32 5H6.68a4 4 0 0 0-3.98 3.59c-.08.67-.7 5.68-.7 7.41a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.41-1.41A2 2 0 0 1 9.83 16h4.34a2 2 0 0 1 1.41.59L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.73-.62-6.74-.7-7.41A4 4 0 0 0 17.32 5z" />
+    </svg>
+  ),
   chip: (p) => (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}>
       <rect x="7" y="7" width="10" height="10" rx="1.5" />

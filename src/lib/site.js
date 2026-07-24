@@ -34,6 +34,7 @@ export const nav = [
   { key: "spec", label: "My Specs", href: "/spec", icon: "chip" },
   { key: "posts", label: "My Posts", href: "/posts", icon: "article" },
   { key: "projects", label: "My Projects", href: "/projects", icon: "projects" },
+  { key: "gaming", label: "Gaming Post", href: "/gaming", icon: "gamepad" },
 ];
 
 /* ---------------------------------------------------------------------------

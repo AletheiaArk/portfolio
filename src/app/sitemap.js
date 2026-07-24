@@ -10,6 +10,7 @@ export default function sitemap() {
     { path: "/about", priority: 0.8 },
     { path: "/spec", priority: 0.7 },
     { path: "/posts", priority: 0.7 },
+    { path: "/gaming", priority: 0.7 },
     { path: "/projects", priority: 0.8 },
   ].map(({ path, priority }) => ({
     url: `${base}${path}`,
@@ -32,5 +33,12 @@ export default function sitemap() {
     priority: 0.6,
   }));
 
-  return [...staticPages, ...projects, ...posts];
+  const gaming = getSlugs("gaming").map((slug) => ({
+    url: `${base}/gaming/${slug}`,
+    lastModified: now,
+    changeFrequency: "weekly",
+    priority: 0.6,
+  }));
+
+  return [...staticPages, ...projects, ...posts, ...gaming];
 }
