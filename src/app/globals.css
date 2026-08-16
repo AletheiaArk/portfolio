@@ -332,28 +332,104 @@ main {
 .page-head-compact .page-title { font-size: 24px; font-weight: 700; letter-spacing: -0.01em; }
 .page-head-compact .page-sub { font-size: 13.5px; margin-top: 5px; }
 
-/* Generic list rows (Recent / Projects) */
-.list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-.list-row {
-  display: flex; align-items: center; gap: 16px;
-  padding: 20px 24px; border-radius: 14px; text-decoration: none;
-  background: rgba(255, 255, 255, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.55);
-  transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+/* Entry rows (Projects · Posts · Gaming) — a magazine-style journal index:
+   a large day numeral in a narrow left rail, a hairline between rows, and
+   small-caps serif labels framing a Mincho title. */
+.jlist { list-style: none; }
+.jrow {
+  display: grid;
+  grid-template-columns: 84px minmax(0, 1fr);
+  align-items: start;
+  column-gap: 40px;
+  row-gap: 20px;
+  padding: 20px 0;
+  border-top: 1px solid rgba(51, 79, 82, 0.14);
+  transition: border-color 0.35s;
 }
-.list-row:hover {
-  transform: translateY(-2px);
-  background: rgba(255, 255, 255, 0.72);
-  box-shadow: 0 12px 26px -16px rgba(51, 79, 82, 0.5);
+.jrow:hover { border-color: rgba(51, 79, 82, 0.3); }
+.jrow.has-cover { grid-template-columns: 84px minmax(0, 1fr) 228px; }
+.jrow.no-date { grid-template-columns: minmax(0, 1fr); }
+.jrow.no-date.has-cover { grid-template-columns: minmax(0, 1fr) 228px; }
+
+/* Left rail — day numeral, hairline, month + year */
+.jrow-date { padding-top: 6px; }
+.jrow-day {
+  display: block;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 25px; font-weight: 600; line-height: 0.88; letter-spacing: 0.01em;
+  color: var(--color-primary);
 }
-.recent-date {
-  flex-shrink: 0; font-size: 12.5px; color: var(--color-secondary);
-  width: 80px; font-variant-numeric: tabular-nums;
+.jrow-rule { display: block; width: 20px; height: 1px; margin-top: 12px; background: var(--color-brand); }
+.jrow-when {
+  display: block; margin-top: 10px;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 9.5px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--color-secondary);
 }
-.list-body { flex: 1; min-width: 0; display: flex; flex-direction: column; }
-.list-title { font-size: 17px; font-weight: 700; color: var(--color-primary); }
-.list-sub { font-size: 13.5px; color: var(--color-secondary); margin-top: 4px; }
-.list-arrow { width: 20px; height: 20px; color: var(--color-secondary); flex-shrink: 0; }
+
+/* Middle — category, title, summary, read more */
+.jrow-body { padding-top: 6px; padding-right: 16px; }
+.jrow-eyebrow {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 9px; font-weight: 700; letter-spacing: 0.26em;
+  text-transform: uppercase; color: var(--color-secondary);
+}
+.jrow-titlelink { text-decoration: none; }
+.jrow-title {
+  margin-top: 10px;
+  font-family: var(--font-mincho), "Hiragino Mincho ProN", serif;
+  font-size: 20px; font-weight: 600; line-height: 1.5; letter-spacing: 0.015em;
+  color: var(--color-primary);
+  transition: color 0.3s;
+}
+.jrow:hover .jrow-title { color: var(--color-brand); }
+.jrow-excerpt {
+  margin-top: 12px; max-width: 48ch;
+  font-family: var(--font-gothic), system-ui, sans-serif;
+  font-size: 13.5px; font-weight: 500; line-height: 1.85; letter-spacing: 0.02em;
+  color: rgba(51, 79, 82, 0.85);
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.jrow-more {
+  position: relative; display: inline-flex; align-items: center; gap: 0.5em;
+  margin-top: 16px; text-decoration: none;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 9.5px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--color-primary);
+  transition: color 0.4s;
+}
+.jrow-more:hover { color: var(--color-brand); }
+.jrow-more::after {
+  content: ""; position: absolute; left: 0; bottom: -3px;
+  width: 100%; height: 1px; background: currentColor;
+  transform: scaleX(0); transform-origin: 0;
+  transition: transform 0.5s cubic-bezier(0.16, 0.84, 0.44, 1);
+}
+.jrow-more:hover::after { transform: scaleX(1); }
+.jrow-arrow { width: 14px; height: 14px; transition: transform 0.45s cubic-bezier(0.16, 0.84, 0.44, 1); }
+.jrow-more:hover .jrow-arrow { transform: translateX(4px); }
+
+/* Right — optional cover image (frontmatter: cover) */
+.jrow-photo { display: block; width: 100%; aspect-ratio: 3 / 2; overflow: hidden; border-radius: 4px; }
+.jrow-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+@media (prefers-reduced-motion: reduce) {
+  .jrow-more::after, .jrow-arrow { transition: none; }
+}
+
+/* Narrow screens: the date sits inline above the entry instead of in a rail. */
+@media (max-width: 640px) {
+  .jrow, .jrow.has-cover, .jrow.no-date, .jrow.no-date.has-cover {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .jrow-date { display: flex; align-items: baseline; gap: 12px; padding-top: 0; }
+  .jrow-day { font-size: 34px; }
+  .jrow-rule { display: none; }
+  .jrow-when { margin-top: 0; }
+  .jrow-body { padding-right: 0; }
+  .jrow-photo { max-width: 320px; }
+}
+
 .empty-note { color: var(--color-secondary); font-size: 15px; padding: 8px 2px; }
 
 .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }

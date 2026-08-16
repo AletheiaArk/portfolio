@@ -13,7 +13,7 @@ export const metadata = {
 export default function ProjectsPage() {
   return (
     <PageShell title="My Projects" subtitle="Things I've built and shipped.">
-      <EntryList items={getAllMeta("projects")} basePath="/projects" showTags />
+      <EntryList items={getAllMeta("projects")} basePath="/projects" showDate />
     </PageShell>
   );
 }

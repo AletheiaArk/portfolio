@@ -65,6 +65,11 @@ export const Icon = {
       <rect x="3" y="5" width="18" height="14" rx="3" /><path d="m4 7 8 6 8-6" />
     </svg>
   ),
+  arrow: (p) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" {...p}>
+      <path d="M5 12h14M12 5l7 7-7 7" />
+    </svg>
+  ),
   chevron: (p) => (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...p}>
       <path d="m9 6 6 6-6 6" />

@@ -1,5 +1,11 @@
 import "./globals.css";
-import { Space_Grotesk, Averia_Gruesa_Libre } from "next/font/google";
+import {
+  Space_Grotesk,
+  Averia_Gruesa_Libre,
+  Cormorant_Garamond,
+  Zen_Old_Mincho,
+  Zen_Kaku_Gothic_New,
+} from "next/font/google";
 import { site } from "@/lib/site";
 
 // Self-hosted fonts (no external request, no layout shift).
@@ -15,6 +21,29 @@ const display = Averia_Gruesa_Libre({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-display",
+});
+
+// Editorial trio used by the entry lists: a Garamond for the small caps labels
+// and dates, a Mincho serif for entry titles, a gothic sans for summaries.
+const serif = Cormorant_Garamond({
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-serif",
+});
+
+const mincho = Zen_Old_Mincho({
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-mincho",
+});
+
+const gothic = Zen_Kaku_Gothic_New({
+  weight: ["300", "400", "500", "700"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-gothic",
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
@@ -91,7 +120,12 @@ const rootStyle = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${sans.variable} ${display.variable}`} style={rootStyle} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${sans.variable} ${display.variable} ${serif.variable} ${mincho.variable} ${gothic.variable}`}
+      style={rootStyle}
+      suppressHydrationWarning
+    >
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteLd) }} />
