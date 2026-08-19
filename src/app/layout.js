@@ -102,6 +102,9 @@ const websiteLd = {
 export const viewport = {
   width: "device-width",
   initialScale: 1,
+  // Let the page paint under the notch / home indicator; the mobile layout
+  // pads itself back out with env(safe-area-inset-*).
+  viewportFit: "cover",
   themeColor: "#35bfab",
 };
 

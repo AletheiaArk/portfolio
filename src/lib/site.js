@@ -28,13 +28,15 @@ export const site = {
 };
 
 /* Navigation — each item is a real page ------------------------------------ */
+// `short` is what the mobile bottom tab bar shows — the full label is kept as
+// the link's accessible name, so shortening never costs screen-reader clarity.
 export const nav = [
-  { key: "home", label: "Home", href: "/", icon: "home" },
-  { key: "about", label: "About", href: "/about", icon: "about" },
-  { key: "spec", label: "My Specs", href: "/spec", icon: "chip" },
-  { key: "posts", label: "My Posts", href: "/posts", icon: "article" },
-  { key: "projects", label: "My Projects", href: "/projects", icon: "projects" },
-  { key: "gaming", label: "Gaming Post", href: "/gaming", icon: "gamepad" },
+  { key: "home", label: "Home", short: "Home", href: "/", icon: "home" },
+  { key: "about", label: "About", short: "About", href: "/about", icon: "about" },
+  { key: "spec", label: "My Specs", short: "Specs", href: "/spec", icon: "chip" },
+  { key: "posts", label: "My Posts", short: "Posts", href: "/posts", icon: "article" },
+  { key: "projects", label: "My Projects", short: "Works", href: "/projects", icon: "projects" },
+  { key: "gaming", label: "Gaming Post", short: "Gaming", href: "/gaming", icon: "gamepad" },
 ];
 
 /* ---------------------------------------------------------------------------

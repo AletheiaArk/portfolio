@@ -20,9 +20,13 @@ export default function Sidebar() {
                 href={n.href}
                 className={"nav-item" + (active ? " active" : "")}
                 aria-current={active ? "page" : undefined}
+                aria-label={n.label}
               >
                 <NavIcon aria-hidden="true" />
-                <span>{n.label}</span>
+                {/* Both labels ship; CSS picks one. aria-label above carries
+                    the real name, so the swap is purely visual. */}
+                <span className="nav-text" aria-hidden="true">{n.label}</span>
+                <span className="nav-short" aria-hidden="true">{n.short || n.label}</span>
               </Link>
             </li>
           );

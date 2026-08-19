@@ -135,6 +135,12 @@ main {
   from { opacity: 0; transform: translateY(12px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+/* Fade-only variant: a transform animation makes <main> the containing block
+   for position:fixed descendants, which would unanchor the mobile tab bar. */
+@keyframes route-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
 @media (prefers-reduced-motion: reduce) {
   .route-transition main { animation: none; }
 }
@@ -189,6 +195,8 @@ main {
   transition: background 0.18s, color 0.18s;
 }
 .nav-item svg { width: 17px; height: 17px; flex-shrink: 0; }
+/* The bottom-bar label variant — only shown by the mobile layout. */
+.nav-short { display: none; }
 .nav-item:hover { color: var(--color-primary); background: rgba(255, 255, 255, 0.45); }
 .nav-item.active {
   background: rgba(255, 255, 255, 0.85);
@@ -568,4 +576,157 @@ main {
   .shell-main { width: 100%; max-width: 640px; margin: 0 auto; }
   .page-card { padding: 30px 26px; border-radius: 18px; }
   .page-title { font-size: 28px; }
+}
+
+/* ==========================================================================
+ *  Mobile (< 768px) — a layout of its own, not a squeezed desktop.
+ *
+ *  Same URLs, same components: the nav card re-forms into a fixed bottom tab
+ *  bar, the bento columns become a single reading order, and every card
+ *  loosens its desktop padding. Nothing here is duplicated markup.
+ * ======================================================================== */
+@media (max-width: 767px) {
+  :root {
+    --bar-h: 60px;
+    --bar-gap: calc(var(--bar-h) + 24px + env(safe-area-inset-bottom));
+  }
+
+  /* dvh, not vh: iOS Safari's collapsing toolbar makes 100vh overshoot. */
+  main { min-height: 100dvh; }
+
+  /* Drop the slide-up so <main> keeps transform:none and the tab bar below
+     can anchor to the viewport instead of to the page. */
+  .route-transition main { animation-name: route-fade; }
+
+  /* --- Primary nav: bottom tab bar ------------------------------------- */
+  /* The <aside> stops generating a box so the fixed bar leaves no gap
+     behind in the flex column (display:none would kill the bar with it). */
+  .home-side,
+  .shell-side { display: contents; }
+
+  .sidebar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+    height: auto;
+    flex-direction: row;
+    gap: 2px;
+    padding: 6px 6px calc(6px + env(safe-area-inset-bottom));
+    border-radius: 0;
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.75);
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(16px) saturate(1.4);
+    -webkit-backdrop-filter: blur(16px) saturate(1.4);
+    box-shadow: 0 -10px 34px -22px rgba(51, 79, 82, 0.7);
+  }
+  .sidebar .nav-label { display: none; }
+  .nav-list { flex-direction: row; width: 100%; gap: 0; }
+  .nav-list > li { flex: 1 1 0; min-width: 0; }
+  .nav-item {
+    flex-direction: column; justify-content: center; gap: 4px;
+    min-height: 48px;
+    padding: 7px 2px 5px;
+    border-radius: 13px;
+    font-size: 9px; font-weight: 600; letter-spacing: 0.05em;
+  }
+  .nav-item svg { width: 20px; height: 20px; }
+  .nav-item .nav-text { display: none; }
+  .nav-item .nav-short { display: block; line-height: 1; }
+  /* A white pill is invisible on a white bar — tint the active tab instead. */
+  .nav-item.active {
+    background: rgba(53, 191, 171, 0.13);
+    color: var(--color-brand);
+    box-shadow: none;
+  }
+
+  /* --- Home --------------------------------------------------------------
+     Reading order: profile → actions → clock → calendar. */
+  .home {
+    gap: 16px;
+    padding: 28px 16px var(--bar-gap);
+  }
+  .home-side, .home-col { max-width: none; }
+  .home-col { gap: 16px; }
+  .home-col > .clock { order: -1; }
+
+  .profile { padding: 26px 20px; }
+  .profile-avatar { width: 78px; height: 78px; margin-bottom: 12px; }
+  .profile-halo { width: 88px; height: 88px; border-radius: 23px; }
+  .profile-name { font-size: 23px; }
+  .profile-role { font-size: 12.5px; }
+  .profile-quote { margin-top: 14px; padding-top: 14px; }
+  .profile-quote p { font-size: 13.5px; line-height: 1.6; }
+
+  .home-controls { gap: 10px; padding: 0; }
+  .write-btn, .github { height: 42px; padding: 0 17px; font-size: 13.5px; }
+  .grid-btn, .icon-only { width: 42px; height: 42px; }
+
+  .clock { padding: 20px 0; }
+  .clock-time { font-size: 42px; letter-spacing: 1px; }
+
+  .calendar { padding: 18px 16px; }
+  .cal-head { margin-bottom: 14px; font-size: 13px; }
+  .cal-grid { gap: 4px 2px; }
+  .cal-grid .day { height: 32px; font-size: 13.5px; border-radius: 9px; }
+
+  /* --- Sub-page shell ---------------------------------------------------- */
+  .shell,
+  .shell-wide {
+    max-width: none;
+    gap: 0;
+    padding: 24px 14px var(--bar-gap);
+  }
+  .shell-main { max-width: none; }
+  .page-card { padding: 26px 18px; border-radius: 18px; }
+  .page-head { margin-bottom: 20px; }
+  .page-title { font-size: 24px; }
+  .page-sub { font-size: 13px; }
+  .page-head-compact .page-title { font-size: 20px; }
+
+  /* --- My Specs: label above value, both left-aligned --------------------- */
+  .spec-col { padding: 14px 15px; border-radius: 12px; }
+  .spec-title, .about-heading { font-size: 19px; }
+  .spec-group + .spec-group, .about-block + .about-block { margin-top: 26px; }
+  .spec-row {
+    flex-direction: column; align-items: flex-start; gap: 3px;
+    padding: 10px 0;
+  }
+  .spec-row dt { font-size: 11.5px; letter-spacing: 0.04em; text-transform: uppercase; }
+  .spec-row dd { font-size: 13.5px; text-align: left; }
+
+  /* --- Entry rows & article ---------------------------------------------- */
+  .jrow { padding: 18px 0; }
+  .jrow-title { font-size: 18px; }
+  .jrow-excerpt { font-size: 13px; line-height: 1.75; }
+  .jrow-photo { max-width: none; }
+  .article { font-size: 14.5px; }
+  .article pre { padding: 12px 13px; font-size: 12.5px; }
+
+  .notfound { min-height: 100dvh; padding: 24px 18px var(--bar-gap); }
+  .notfound-card { padding: 36px 24px; }
+  .notfound-card h1 { font-size: 44px; }
+}
+
+/* Touch devices have no hover: without this, tapping a card leaves it stuck
+   in its hover state until the next tap elsewhere. */
+@media (hover: none) {
+  .write-btn:hover, .github:hover, .icon-only:hover, .grid-btn:hover {
+    transform: none; box-shadow: none;
+  }
+  .write-btn:hover { box-shadow: none; }
+  .nav-item:hover { background: none; color: var(--color-secondary); }
+  .nav-item.active, .nav-item.active:hover {
+    color: var(--color-primary);
+    background: rgba(255, 255, 255, 0.85);
+  }
+  /* …but on the mobile bar the tinted pill above must survive the reset. */
+  @media (max-width: 767px) {
+    .nav-item.active, .nav-item.active:hover {
+      color: var(--color-brand);
+      background: rgba(53, 191, 171, 0.13);
+    }
+  }
+  .jrow:hover { border-color: rgba(51, 79, 82, 0.14); }
+  .jrow:hover .jrow-title { color: var(--color-primary); }
+  .jrow-more:hover::after { transform: scaleX(0); }
+  .jrow-more:hover .jrow-arrow { transform: none; }
 }
