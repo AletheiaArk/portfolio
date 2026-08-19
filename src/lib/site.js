@@ -78,9 +78,12 @@ export const specs = [
     title: "Gaming",
     hardware: [
       { label: "CPU", value: "AMD Ryzen 5 9600X" },
+      { label: "Motherboard", value: "MSI MPG B850I EDGE TI WIFI (Mini-ITX)" },
       { label: "GPU", value: "AMD Radeon RX 9060 XT 16GB" },
       { label: "Memory", value: "G.SKILL Trident Z5 Royal Neo DDR5-6000 CL28 32GB" },
       { label: "Storage", value: "1TB + 1TB" },
+      { label: "PSU", value: "Cooler Master V SFX Gold 850 ATX 3.1 (850W 80+ Gold)" },
+      { label: "Case", value: "Mechanic Master C24 (Mini-ITX, Polar White)" },
       { label: "Monitor", value: "Gigabyte GS27QA (27\" 2K 180Hz)" },
       { label: "Keyboard", value: "Evoworks Evo80 Aluminum TKL Hotswap Wireless (Anodized Sand Gold)" },
       { label: "Mouse", value: "Logitech G304 X & ATK F1 V2" },
