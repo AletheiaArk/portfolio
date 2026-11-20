@@ -323,10 +323,10 @@ main {
   display: flex; align-items: flex-start; gap: 28px;
   padding: 48px 24px 64px;
 }
-/* Fluid variant (My Spec): scales with the viewport instead of a fixed cap,
-   so it fills the screen on 1080p / 2K / 4K. The 2400px ceiling just keeps
-   rows from stretching absurdly on ultra-wide displays. */
-.shell-wide { max-width: min(60%, 2400px); }
+/* Fluid variant (My Spec): never narrower than the standard 1120px shell, then
+   grows to 60% of the viewport so it fills the screen on 2K / 4K. The 2400px
+   ceiling just keeps rows from stretching absurdly on ultra-wide displays. */
+.shell-wide { max-width: clamp(1120px, 60%, 2400px); }
 .shell-side { width: 232px; flex-shrink: 0; position: sticky; top: 48px; }
 .shell-main { flex: 1; min-width: 0; }
 
