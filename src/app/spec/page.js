@@ -1,7 +1,7 @@
 import PageShell from "@/components/layout/PageShell";
 import { specs } from "@/lib/site";
 
-const description = "The hardware and software behind my server, development, and gaming setups.";
+const description = "The hardware and software behind my server, development, local AI, and gaming setups.";
 export const metadata = {
   title: "My Specs",
   description,

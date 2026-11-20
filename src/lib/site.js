@@ -76,6 +76,22 @@ export const specs = [
     ],
   },
   {
+    key: "local-ai",
+    title: "Local AI",
+    hardware: [
+      { label: "Model", value: "Mac Studio" },
+      { label: "Chip", value: "Apple M5 Max" },
+      { label: "CPU", value: "18-core (6 super + 12 performance cores)" },
+      { label: "GPU", value: "40-core with Neural Accelerators" },
+      { label: "Neural Engine", value: "16-core" },
+      { label: "Memory", value: "128GB unified memory (614GB/s)" },
+      { label: "Storage", value: "512GB SSD" },
+    ],
+    software: [
+      { label: "OS", value: "macOS" },
+    ],
+  },
+  {
     key: "gaming",
     title: "Gaming",
     hardware: [
